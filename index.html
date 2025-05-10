@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reggae+One&display=swap" rel="stylesheet">
+    <link href="reset.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="index.js" type="module"></script>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <main class="flex-column align-center justify-center h-100">
+      <button id="about-button">?</button>
+      <h1><span>C<br>S<br>S</span>HAIKU</h1>
+      <div id="markup-selector-container">
+        <h2>Select your markup:</h2>
+        <div id="markup-selector" class="flex-row align-center justify-around">
+        </div>
+      </div>
+      <div id="haiku" class="flex-row align-center justify-around gap" style="display: none;">
+        <div id="editor-container">
+          <div>
+            <div id="editor" contenteditable="plaintext-only" spellcheck="false"></div>
+            <pre id="editor-highlight">
+              <code></code>
+            </pre>
+          </div>
+          <p id="editor-warning" style="display: none;">Only 3 properties are allowed.</p>
+        </div>
+        <div id="preview">
+          <div style="display: none;">
+            <div></div>
+          </div>
+          <div style="display: none;">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <dialog>
+      <div class="flex-column justify-space-between gap">
+        <h2>About</h2>
+        <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
+        <label for="about-dont-show-again">
+          <input id="about-dont-show-again" type="checkbox">
+          Don't show again
+        </label>
+      </div>
+    </dialog>
+  </body>
+</html>

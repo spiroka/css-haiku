@@ -1,0 +1,201 @@
+:root {
+  /* Editor */
+  --editor-line-height: 1.5;
+  --editor-padding: calc(var(--editor-line-height) * 1em);
+  --editor-border-width: 5px;
+  --editor-height: calc(var(--editor-line-height) * 1em * 3 + 2 * var(--editor-padding) + 2 * var(--editor-border-width));
+  --editor-width: 50ch;
+
+  /* Preview */
+  --preview-border-width: 5px;
+
+  /* Colors */
+  --color-bg: oklch(0.9 0.03 80);
+  --color-text1: oklch(0.3 0.2 270);
+  --color-text2: oklch(0.4 0.2 26);
+
+  /* Common */
+  --space: 1rem;
+
+  font-size: 16px;
+  font-family: system-ui;
+}
+
+body {
+  margin: 0;
+  color: var(--color-text1);
+  background-color: var(--color-bg);
+  height: 100dvh;
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+h1 {
+  font-family: "Reggae One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 6rem;
+  text-shadow: 3px 3px 0 var(--color-text2);
+  view-transition-name: title;
+
+  span {
+    color: var(--color-text2);
+    font-size: 1.7rem;
+    line-height: 1.7rem;
+    display: inline-block;
+    width: 1ch;
+    text-shadow: none;
+    margin-right: 0.1em;
+  }
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.gap {
+  gap: var(--space);
+}
+
+#about-button {
+  position: absolute;
+  top: var(--space);
+  right: var(--space);
+  color: var(--color-bg);
+  background-color: var(--color-text1);
+  border-radius: 100%;
+  border: 0;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  cursor: pointer;
+}
+
+dialog {
+  width: 60ch;
+  color: var(--color-text1);
+  background-color: var(--color-bg);
+  border: 5px solid currentColor;
+
+  &::backdrop {
+    backdrop-filter: blur(10px);
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+#editor-container {
+  position: relative;
+
+  > div {
+    display: grid;
+    min-height: var(--editor-height);
+  }
+
+  #editor {
+    min-height: var(--editor-height);
+    width: var(--editor-width);
+    border: var(--editor-border-width) solid transparent;
+    padding: var(--editor-padding);
+    color: transparent;
+    caret-color: black;
+    font-family: monospace;
+    font-weight: bold;
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  #editor-highlight {
+    position: relative;
+    min-height: var(--editor-height);
+    width: var(--editor-width);
+    pointer-events: none;
+    border: var(--editor-border-width) solid currentColor;
+    padding: var(--editor-padding);
+    margin: 0;
+    white-space: pre-line;
+    font-weight: bold;
+    grid-row: 1;
+    grid-column: 1;
+
+    :after {
+      content: 'CSS';
+      position: absolute;
+      right: 0;
+      bottom: calc(-1 * var(--editor-border-width));
+      padding: 0.2em 0.5em;
+      background: var(--color-text1);
+      color: var(--color-bg);
+    }
+  }
+}
+
+#preview {
+  position: relative;
+}
+
+#preview:after {
+  content: 'Preview';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.2em 0.5em;
+  background: var(--color-text1);
+  color: var(--color-bg);
+}
+
+#preview > div {
+  width: 50ch;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  border: var(--preview-border-width) solid currentColor;
+
+  div {
+    flex: 1;
+  }
+}
+
+/* PrismJs */
+.token.property,
+.token.punctuation {
+  color: var(--color-text2);
+}
