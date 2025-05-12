@@ -48,6 +48,8 @@ for (let element of preview.children) {
         element.style.display = 'flex';
         haiku.style.display = 'flex';
         markupSelectorContainer.remove();
+        document.querySelector('main').classList.remove('justify-center');
+        editor.focus();
       });
     }
   });
@@ -75,15 +77,15 @@ editor.addEventListener('input', ({ target: { textContent: css } }) => {
   editorHighlight.innerHTML = highlighted;
 });
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const ctx = canvas.getContext('2d');
-ctx.lineCap = 'round';
-ctx.fillStyle = getComputedStyle(canvas).getPropertyValue('--color-text1');
-ctx.moveTo(0, 0);
-ctx.lineTo(50, 100);
-ctx.lineWidth = 3;
-ctx.stroke();
-ctx.lineTo(70, 120);
-ctx.lineWidth = 2;
-ctx.stroke();
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
+// const ctx = canvas.getContext('2d');
+// ctx.lineCap = 'round';
+// ctx.fillStyle = getComputedStyle(canvas).getPropertyValue('--color-text1');
+// ctx.moveTo(0, 0);
+// ctx.lineTo(50, 100);
+// ctx.lineWidth = 3;
+// ctx.stroke();
+// ctx.lineTo(70, 120);
+// ctx.lineWidth = 2;
+// ctx.stroke();

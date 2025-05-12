@@ -21,7 +21,7 @@
         <div id="markup-selector" class="flex-row align-center justify-around">
         </div>
       </div>
-      <div id="haiku" class="flex-row align-center justify-around gap" style="display: none;">
+      <div id="haiku" class="flex-row justify-around gap" style="display: none;">
         <div id="editor-container">
           <div>
             <div id="editor" contenteditable="plaintext-only" spellcheck="false"></div>
@@ -30,6 +30,7 @@
             </pre>
           </div>
           <p id="editor-warning" style="display: none;">Only 3 properties are allowed.</p>
+          <button id="share-button" class="btn align-self-start">Share</button>
         </div>
         <div id="preview">
           <div style="display: none;">
@@ -43,15 +44,21 @@
         </div>
       </div>
     </main>
+    <footer>
+      %__APP_VERSION__%
+    </footer>
     <dialog>
-      <div class="flex-column justify-space-between gap">
-        <h2>About</h2>
-        <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
-        <label for="about-dont-show-again">
-          <input id="about-dont-show-again" type="checkbox">
-          Don't show again
-        </label>
-      </div>
+      <form method="dialog">
+        <div class="flex-column justify-space-between gap">
+          <h2>About</h2>
+          <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
+          <label for="about-dont-show-again">
+            <input id="about-dont-show-again" type="checkbox">
+            Don't show again
+          </label>
+        </div>
+        <button id="about-close" formmethod="dialog">×</button>
+      </form>
     </dialog>
   </body>
 </html>
