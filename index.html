@@ -47,7 +47,7 @@
     <footer>
       %__APP_VERSION__%
     </footer>
-    <dialog>
+    <dialog id="about-dialog">
       <form method="dialog">
         <div class="flex-column justify-space-between gap">
           <h2>About</h2>
@@ -57,7 +57,12 @@
             Don't show again
           </label>
         </div>
-        <button id="about-close" formmethod="dialog">×</button>
+        <button id="dialog-close" formmethod="dialog">×</button>
+      </form>
+    </dialog>
+    <dialog id="share-dialog">
+      <form method="dialog">
+        <button id="dialog-close" formmethod="dialog">×</button>
       </form>
     </dialog>
   </body>

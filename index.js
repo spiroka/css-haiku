@@ -11,8 +11,50 @@ const preview = document.getElementById('preview');
 const haiku = document.getElementById('haiku');
 const canvas = document.getElementById('canvas');
 const aboutBtn = document.getElementById('about-button');
-const aboutDialog = document.querySelector('dialog');
+const aboutDialog = document.getElementById('about-dialog');
 const aboutCheckbox = document.getElementById('about-dont-show-again');
+const shareDialog = document.getElementById('share-dialog');
+const shareBtn = document.getElementById('share-button');
+
+let selectedElement;
+
+function selectMarkup(el) {
+  selectedElement = el;
+  el.style.display = 'flex';
+  haiku.style.display = 'flex';
+  markupSelectorContainer.remove();
+  document.querySelector('main').classList.remove('justify-center');
+  editor.focus();
+}
+
+function handleCssChanged(css) {
+  for (let i = 0; i < selectedElement.children.length; i++) {
+    const child = selectedElement.children.item(i);
+    child.style = `${css}; --index: ${i}; --random: ${Math.random()}`;
+  }
+
+  const tokens = tokenize(css, Prism.languages.css);
+  const properties = tokens.filter(({ type }) => type === 'property');
+
+  if (properties.length > 3) {
+    editorWarning.style.display = 'block';
+  } else {
+    editorWarning.style.display = 'none';
+  }
+
+  const highlighted = highlight(css, Prism.languages.css, 'css');
+
+  editorHighlight.innerHTML = highlighted;
+}
+
+const params = new URLSearchParams(window.location.search);
+const css = atob(params.get('css'));
+const markup = parseInt(params.get('markup'));
+
+if (!isNaN(markup) && css) {
+  selectMarkup(preview.children[markup]);
+  handleCssChanged(css);
+}
 
 aboutBtn.addEventListener('click', () => {
   aboutDialog.showModal();
@@ -32,7 +74,10 @@ if (localStorage.getItem('dont-show-about') !== 'true') {
   aboutCheckbox.closest('label').remove();
 }
 
-let selectedElement;
+shareBtn.addEventListener('click', () => {
+  shareDialog.append(`${window.location.href}?css=${btoa(editor.textContent)}&markup=0`);
+  shareDialog.showModal();
+});
 
 for (let element of preview.children) {
   const contents = element.innerHTML
@@ -43,14 +88,7 @@ for (let element of preview.children) {
   const markupEl = markupSelectorItem({
     contents,
     onSelect() {
-      document.startViewTransition(() => {
-        selectedElement = element;
-        element.style.display = 'flex';
-        haiku.style.display = 'flex';
-        markupSelectorContainer.remove();
-        document.querySelector('main').classList.remove('justify-center');
-        editor.focus();
-      });
+      document.startViewTransition(() => selectMarkup(element));
     }
   });
 
@@ -58,23 +96,7 @@ for (let element of preview.children) {
 }
 
 editor.addEventListener('input', ({ target: { textContent: css } }) => {
-  for (let i = 0; i < selectedElement.children.length; i++) {
-    const child = selectedElement.children.item(i);
-    child.style = `${css}; --index: ${i}; --random: ${Math.random()}`;
-  }
-
-  const tokens = tokenize(css, Prism.languages.css);
-  const properties = tokens.filter(({ type }) => type === 'property');
-
-  if (properties.length > 3) {
-    editorWarning.style.display = 'block';
-  } else {
-    editorWarning.style.display = 'none';
-  }
-
-  const highlighted = highlight(css, Prism.languages.css, 'css');
-
-  editorHighlight.innerHTML = highlighted;
+  handleCssChanged(css);
 });
 
 // canvas.width = window.innerWidth;
